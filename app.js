@@ -81,7 +81,7 @@ const sessionConfig = {
     // name:'session',
     // to get rid of session deprecation warnings
     // secret: 'thishouldbeabettersecret',
-    secret
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -135,7 +135,12 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err })
 })
 
-app.listen(3000, () => {
-    console.log('Serving on port 3000')
+// app.listen(3000, () => {
+//     console.log('Serving on port 3000')
+// })
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`)
 })
 
