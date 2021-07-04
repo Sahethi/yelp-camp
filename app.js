@@ -21,7 +21,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
 const campgroundsRoutes = require('./routes/campgrounds');
 const reviewsRoutes = require('./routes/reviews');
-const MongoStore = require('connect-mongo');
+// const MongoStore = require('connect-mongo')(session);
 
 // const dbUrl = process.env.DB_URL;
 
@@ -60,9 +60,21 @@ app.use(mongoSanitize({
     replaceWith: '_',
   }));
 
+/*
+const store = new MongoStore({
+    url: 'mongodb://localhost:27017/yelp-camp',
+    secret: 'thishouldbeabettersecret',
+    touchAfter: 24 * 60 * 60
+});
+
+store.on("error", function(e){
+    console.log("SESSION STORE ERROR");
+})
+*/
 
 const sessionConfig = {
-    name:'session',
+    // store,
+    // name:'session',
     // to get rid of session deprecation warnings
     secret: 'thishouldbeabettersecret',
     resave: false,
