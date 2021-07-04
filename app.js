@@ -34,7 +34,9 @@ const reviewsRoutes = require('./routes/reviews');
 //     useFindAndModify: false
 // });
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
+
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -72,11 +74,14 @@ store.on("error", function(e){
 })
 */
 
+const secret = process.env.SECRET || 'thishouldbeabettersecret';
+
 const sessionConfig = {
     // store,
     // name:'session',
     // to get rid of session deprecation warnings
-    secret: 'thishouldbeabettersecret',
+    // secret: 'thishouldbeabettersecret',
+    secret
     resave: false,
     saveUninitialized: true,
     cookie: {
